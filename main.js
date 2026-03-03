@@ -91,39 +91,48 @@ async function analyzeImage() {
 
 const generateNumbers = () => {
   lottoNumbersContainer.innerHTML = '';
-  const numbers = new Set();
   
-  // Pick 7 unique numbers
-  while (numbers.size < 7) {
-    numbers.add(Math.floor(Math.random() * 45) + 1);
+  // Generate 5 rows
+  for (let row = 0; row < 5; row++) {
+    const rowContainer = document.createElement('div');
+    rowContainer.className = 'lotto-row';
+    
+    const numbers = new Set();
+    // Pick 7 unique numbers
+    while (numbers.size < 7) {
+      numbers.add(Math.floor(Math.random() * 45) + 1);
+    }
+    
+    const numbersArray = Array.from(numbers);
+    const mainNumbers = numbersArray.slice(0, 6).sort((a, b) => a - b);
+    const bonusNumber = numbersArray[6];
+
+    // Create main numbers
+    mainNumbers.forEach((number, index) => {
+      const ball = document.createElement('div');
+      ball.className = 'lotto-number';
+      ball.textContent = number;
+      // Stagger animation across rows and balls
+      ball.style.animationDelay = `${(row * 0.2) + (index * 0.1)}s`;
+      rowContainer.appendChild(ball);
+    });
+
+    // Create plus sign
+    const plus = document.createElement('div');
+    plus.className = 'lotto-plus';
+    plus.textContent = '+';
+    plus.style.animationDelay = `${(row * 0.2) + 0.7}s`;
+    rowContainer.appendChild(plus);
+
+    // Create bonus number
+    const bonusBall = document.createElement('div');
+    bonusBall.className = 'lotto-number bonus';
+    bonusBall.textContent = bonusNumber;
+    bonusBall.style.animationDelay = `${(row * 0.2) + 0.9}s`;
+    rowContainer.appendChild(bonusBall);
+    
+    lottoNumbersContainer.appendChild(rowContainer);
   }
-  
-  const numbersArray = Array.from(numbers);
-  const mainNumbers = numbersArray.slice(0, 6).sort((a, b) => a - b);
-  const bonusNumber = numbersArray[6];
-
-  // Create main numbers
-  mainNumbers.forEach((number, index) => {
-    const ball = document.createElement('div');
-    ball.className = 'lotto-number';
-    ball.textContent = number;
-    ball.style.animationDelay = `${index * 0.15}s`;
-    lottoNumbersContainer.appendChild(ball);
-  });
-
-  // Create plus sign
-  const plus = document.createElement('div');
-  plus.className = 'lotto-plus';
-  plus.textContent = '+';
-  plus.style.animationDelay = '1s';
-  lottoNumbersContainer.appendChild(plus);
-
-  // Create bonus number
-  const bonusBall = document.createElement('div');
-  bonusBall.className = 'lotto-number bonus';
-  bonusBall.textContent = bonusNumber;
-  bonusBall.style.animationDelay = '1.2s';
-  lottoNumbersContainer.appendChild(bonusBall);
 };
 
 // --- Theme Functions ---
