@@ -12,11 +12,21 @@
     
     <section class="animal-test-section">
       <h1>동물상 테스트</h1>
-      <p class="subtitle">AI가 분석하는 당신의 동물상</p>
-      <div id="webcam-container" class="webcam-container"></div>
+      <p class="subtitle">사진을 업로드하여 당신의 동물상을 확인하세요</p>
+      
+      <div class="upload-area" id="upload-area">
+        <input type="file" id="image-upload" accept="image/*" class="hidden">
+        <label for="image-upload" class="upload-label">
+          <div id="image-preview-container" class="image-preview-container">
+            <span id="upload-icon">📷</span>
+            <p id="upload-text">사진 업로드 (클릭 또는 드래그)</p>
+            <img id="image-preview" src="#" alt="Preview" class="hidden">
+          </div>
+        </label>
+      </div>
+
       <div id="label-container" class="label-container"></div>
-      <button type="button" id="start-btn" class="primary-btn">테스트 시작하기</button>
-      <div id="loading-spinner" class="hidden">모델 로딩 중...</div>
+      <div id="loading-spinner" class="hidden">AI 분석 중...</div>
     </section>
 
     <hr class="section-divider">

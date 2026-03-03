@@ -2,65 +2,77 @@
 const lottoNumbersContainer = document.getElementById('lotto-numbers');
 const generateBtn = document.getElementById('generate-btn');
 const themeToggle = document.getElementById('theme-toggle');
-const startBtn = document.getElementById('start-btn');
-const loadingSpinner = document.getElementById('loading-spinner');
+const imageUpload = document.getElementById('image-upload');
+const imagePreview = document.getElementById('image-preview');
+const uploadIcon = document.getElementById('upload-icon');
+const uploadText = document.getElementById('upload-text');
 const labelContainer = document.getElementById('label-container');
+const loadingSpinner = document.getElementById('loading-spinner');
 
 // Teachable Machine Config
 const MODEL_URL = "https://teachablemachine.withgoogle.com/models/Qd49IN6Rt/";
-let model, webcam, maxPredictions;
+let model, maxPredictions;
 
 // --- Animal Test Functions ---
 
-async function initAnimalTest() {
-  startBtn.classList.add('hidden');
-  loadingSpinner.classList.remove('hidden');
-
-  try {
+async function loadModel() {
+  if (!model) {
     const modelURL = MODEL_URL + "model.json";
     const metadataURL = MODEL_URL + "metadata.json";
-
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
-
-    const flip = true;
-    webcam = new tmImage.Webcam(200, 200, flip);
-    await webcam.setup();
-    await webcam.play();
-    
-    loadingSpinner.classList.add('hidden');
-    window.requestAnimationFrame(loop);
-
-    document.getElementById("webcam-container").appendChild(webcam.canvas);
-    for (let i = 0; i < maxPredictions; i++) {
-      labelContainer.appendChild(document.createElement("div"));
-    }
-  } catch (error) {
-    console.error("Model load failed:", error);
-    loadingSpinner.textContent = "카메라 권한이 필요하거나 모델을 불러올 수 없습니다.";
-    startBtn.classList.remove('hidden');
   }
 }
 
-async function loop() {
-  webcam.update();
-  await predict();
-  window.requestAnimationFrame(loop);
+async function handleImageUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  // Show preview
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    imagePreview.src = e.target.result;
+    imagePreview.classList.remove('hidden');
+    uploadIcon.classList.add('hidden');
+    uploadText.classList.add('hidden');
+    
+    // Analyze
+    await analyzeImage();
+  };
+  reader.readAsDataURL(file);
 }
 
-async function predict() {
-  const prediction = await model.predict(webcam.canvas);
-  for (let i = 0; i < maxPredictions; i++) {
-    const className = prediction[i].className;
-    const probability = (prediction[i].probability * 100).toFixed(0);
-    labelContainer.childNodes[i].innerHTML = `${className}: ${probability}%`;
+async function analyzeImage() {
+  loadingSpinner.classList.remove('hidden');
+  labelContainer.innerHTML = '';
+  
+  try {
+    await loadModel();
+    const prediction = await model.predict(imagePreview);
     
-    // Highlight highest probability
-    if (prediction[i].probability > 0.5) {
-        labelContainer.childNodes[i].style.color = "var(--primary-btn-bg)";
-    } else {
-        labelContainer.childNodes[i].style.color = "inherit";
+    loadingSpinner.classList.add('hidden');
+    
+    // Sort predictions by probability
+    prediction.sort((a, b) => b.probability - a.probability);
+
+    for (let i = 0; i < maxPredictions; i++) {
+      const className = prediction[i].className;
+      const probability = (prediction[i].probability * 100).toFixed(0);
+      
+      const resultDiv = document.createElement('div');
+      resultDiv.innerHTML = `<span>${className}</span> <span>${probability}%</span>`;
+      
+      // Highlight top result
+      if (i === 0) {
+        resultDiv.style.color = "var(--primary-btn-bg)";
+        resultDiv.style.fontSize = "1.2em";
+      }
+      
+      labelContainer.appendChild(resultDiv);
     }
+  } catch (error) {
+    console.error("Analysis failed:", error);
+    loadingSpinner.textContent = "분석 중 오류가 발생했습니다.";
   }
 }
 
@@ -106,7 +118,7 @@ const toggleTheme = () => {
 
 generateBtn.addEventListener('click', generateNumbers);
 themeToggle.addEventListener('click', toggleTheme);
-startBtn.addEventListener('click', initAnimalTest);
+imageUpload.addEventListener('change', handleImageUpload);
 
 // Initial Setup
 initTheme();
