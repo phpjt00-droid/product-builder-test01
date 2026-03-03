@@ -1,13 +1,13 @@
 // --- Selectors ---
 const views = document.querySelectorAll('.view');
-const homeView = document.getElementById('home-view');
-const animalTestView = document.getElementById('animal-test-view');
-const lottoView = document.getElementById('lotto-view');
-
 const appLogo = document.getElementById('app-logo');
 const goAnimalBtn = document.getElementById('go-animal-test');
 const goLottoBtn = document.getElementById('go-lotto');
 const backBtns = document.querySelectorAll('.back-btn');
+
+// Footer Links
+const linkAbout = document.getElementById('link-about');
+const linkPrivacy = document.getElementById('link-privacy');
 
 const themeToggle = document.getElementById('theme-toggle');
 const lottoNumbersContainer = document.getElementById('lotto-numbers');
@@ -79,7 +79,10 @@ async function analyzeImage() {
       const probability = (prediction[i].probability * 100).toFixed(0);
       const resultDiv = document.createElement('div');
       resultDiv.innerHTML = `<span>${className}</span> <span>${probability}%</span>`;
-      if (i === 0) resultDiv.style.fontWeight = "bold";
+      if (i === 0) {
+        resultDiv.style.fontWeight = "bold";
+        resultDiv.style.color = "var(--primary-color)";
+      }
       labelContainer.appendChild(resultDiv);
     }
   } catch (error) {
@@ -91,44 +94,34 @@ async function analyzeImage() {
 
 const generateNumbers = () => {
   lottoNumbersContainer.innerHTML = '';
-  
-  // Generate 5 rows
   for (let row = 0; row < 5; row++) {
     const rowContainer = document.createElement('div');
     rowContainer.className = 'lotto-row';
-    
     const numbers = new Set();
-    // Pick 7 unique numbers
     while (numbers.size < 7) {
       numbers.add(Math.floor(Math.random() * 45) + 1);
     }
-    
     const numbersArray = Array.from(numbers);
     const mainNumbers = numbersArray.slice(0, 6).sort((a, b) => a - b);
     const bonusNumber = numbersArray[6];
 
-    // Create main numbers
     mainNumbers.forEach((number, index) => {
       const ball = document.createElement('div');
       ball.className = 'lotto-number';
       ball.textContent = number;
-      // Stagger animation across rows and balls
-      ball.style.animationDelay = `${(row * 0.2) + (index * 0.1)}s`;
+      ball.style.animationDelay = `${(row * 0.15) + (index * 0.05)}s`;
       rowContainer.appendChild(ball);
     });
 
-    // Create plus sign
     const plus = document.createElement('div');
     plus.className = 'lotto-plus';
     plus.textContent = '+';
-    plus.style.animationDelay = `${(row * 0.2) + 0.7}s`;
     rowContainer.appendChild(plus);
 
-    // Create bonus number
     const bonusBall = document.createElement('div');
     bonusBall.className = 'lotto-number bonus';
     bonusBall.textContent = bonusNumber;
-    bonusBall.style.animationDelay = `${(row * 0.2) + 0.9}s`;
+    bonusBall.style.animationDelay = `${(row * 0.15) + 0.5}s`;
     rowContainer.appendChild(bonusBall);
     
     lottoNumbersContainer.appendChild(rowContainer);
@@ -157,6 +150,9 @@ appLogo.addEventListener('click', () => switchView('home-view'));
 goAnimalBtn.addEventListener('click', () => switchView('animal-test-view'));
 goLottoBtn.addEventListener('click', () => switchView('lotto-view'));
 backBtns.forEach(btn => btn.addEventListener('click', () => switchView('home-view')));
+
+linkAbout.addEventListener('click', (e) => { e.preventDefault(); switchView('about-view'); });
+linkPrivacy.addEventListener('click', (e) => { e.preventDefault(); switchView('privacy-view'); });
 
 themeToggle.addEventListener('click', toggleTheme);
 generateBtn.addEventListener('click', generateNumbers);

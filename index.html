@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>멀티 툴 서비스</title>
+  <title>MultiTool - AI 동물상 테스트 & 로또 번호 생성기</title>
+  <meta name="description" content="AI를 이용한 재미있는 동물상 테스트와 행운의 로또 번호 생성기를 무료로 이용해보세요. 사용자의 프라이버시를 존중하는 고품질 웹 도구 모음입니다.">
+  <meta name="keywords" content="동물상 테스트, 로또 번호 생성, AI 테스트, 인공지능 동물상, 무료 도구">
   <meta name="google-adsense-account" content="ca-pub-3229803978165372">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="MultiTool - AI 동물상 테스트 & 로또 번호 생성기">
+  <meta property="og:description" content="AI 분석을 통한 동물상 테스트와 행운의 로또 번호 생성">
+  <meta property="og:type" content="website">
+  
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3229803978165372"
      crossorigin="anonymous"></script>
   <link href='/style.css' rel='stylesheet'>
@@ -22,17 +30,20 @@
   <main class="container">
     <!-- Home View -->
     <section id="home-view" class="view">
-      <h1>어떤 서비스를 이용하시겠습니까?</h1>
+      <div class="hero-section">
+        <h1>스마트한 웹 도구 모음</h1>
+        <p>최신 AI 기술과 알고리즘을 활용한 다양한 도구를 무료로 경험해보세요.</p>
+      </div>
       <div class="card-grid">
         <div class="tool-card" id="go-animal-test">
           <div class="card-icon">🐶</div>
           <h3>동물상 테스트</h3>
-          <p>AI가 분석하는 당신의 동물상 확인</p>
+          <p>Google AI(Teachable Machine)가 분석하는 당신의 동물상 확인</p>
         </div>
         <div class="tool-card" id="go-lotto">
           <div class="card-icon">🎱</div>
           <h3>로또 생성기</h3>
-          <p>행운의 번호를 추첨해드립니다</p>
+          <p>고도의 무작위 알고리즘으로 추출하는 행운의 번호</p>
         </div>
       </div>
     </section>
@@ -41,9 +52,11 @@
     <section id="animal-test-view" class="view hidden">
       <div class="view-header">
         <button class="back-btn">← 뒤로가기</button>
-        <h1>동물상 테스트</h1>
+        <h1>AI 동물상 테스트</h1>
       </div>
-      <p class="subtitle">사진을 업로드하여 당신의 동물상을 확인하세요</p>
+      <div class="content-box">
+        <p>본 서비스는 Google의 <strong>Teachable Machine</strong> 라이브러리를 활용하여 개발되었습니다. 사용자가 업로드한 이미지는 서버에 저장되지 않으며, 브라우저 내 인공지능 모델을 통해 즉시 분석됩니다.</p>
+      </div>
       
       <div class="upload-area" id="upload-area">
         <input type="file" id="image-upload" accept="image/*" class="hidden">
@@ -66,30 +79,76 @@
         <button class="back-btn">← 뒤로가기</button>
         <h1>로또 번호 생성기</h1>
       </div>
+      <div class="content-box">
+        <p>자바스크립트의 강력한 무작위 추출 알고리즘을 사용하여 중복 없는 6개의 번호와 1개의 보너스 번호를 실시간으로 생성합니다. 행운을 빕니다!</p>
+      </div>
       <div id="lotto-numbers" class="lotto-numbers"></div>
-      <button id="generate-btn" class="secondary-btn">번호 생성</button>
+      <button id="generate-btn" class="secondary-btn">번호 생성하기</button>
+    </section>
+
+    <!-- Info Views -->
+    <section id="about-view" class="view hidden">
+      <div class="view-header">
+        <button class="back-btn">← 뒤로가기</button>
+        <h1>About MultiTool</h1>
+      </div>
+      <div class="info-content">
+        <p>MultiTool은 사용자에게 유용한 웹 기반 도구를 제공하기 위해 설립되었습니다. 인공지능 기술과 창의적인 알고리즘을 결합하여 일상에 재미와 편의를 더하고자 합니다.</p>
+        <h3>우리의 가치</h3>
+        <ul>
+          <li><strong>사용자 우선</strong>: 간결하고 직관적인 UI/UX를 지향합니다.</li>
+          <li><strong>프라이버시</strong>: 모든 개인 데이터 처리는 최소화하며, 민감한 정보는 서버에 저장하지 않습니다.</li>
+          <li><strong>무료 제공</strong>: 모든 핵심 기능을 광고 기반으로 무료 제공하여 접근성을 높입니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="privacy-view" class="view hidden">
+      <div class="view-header">
+        <button class="back-btn">← 뒤로가기</button>
+        <h1>개인정보처리방침</h1>
+      </div>
+      <div class="info-content">
+        <p>본 사이트는 Google AdSense 및 Disqus를 통해 서비스 유지에 필요한 최소한의 데이터를 수집할 수 있습니다.</p>
+        <ul>
+          <li><strong>데이터 수집</strong>: 사용자가 업로드한 이미지는 분석 직후 파기되며 서버에 저장되지 않습니다.</li>
+          <li><strong>쿠키 사용</strong>: 광고 제공 및 통계 분석을 위해 쿠키가 사용될 수 있습니다. 사용자는 브라우저 설정에서 이를 거부할 수 있습니다.</li>
+          <li><strong>제3자 서비스</strong>: Google AdSense, Disqus의 정책을 따릅니다.</li>
+        </ul>
+      </div>
     </section>
 
     <!-- Shared Sections -->
     <section class="contact-section">
       <hr>
-      <h3>제휴 문의</h3>
+      <h3>제휴 및 서비스 문의</h3>
       <form action="https://formspree.io/f/xeelbblz" method="POST">
         <div class="form-group">
           <input type="email" name="email" placeholder="이메일 주소" required>
         </div>
         <div class="form-group">
-          <textarea name="message" placeholder="문의 내용" required></textarea>
+          <textarea name="message" placeholder="문의 내용을 상세히 적어주세요" required></textarea>
         </div>
-        <button type="submit" class="submit-btn">문의하기</button>
+        <button type="submit" class="submit-btn">문의 메시지 보내기</button>
       </form>
     </section>
 
     <section class="comments-section">
       <hr>
+      <h3>사용자 의견</h3>
       <div id="disqus_thread"></div>
     </section>
   </main>
+
+  <footer class="main-footer">
+    <div class="footer-content">
+      <p>&copy; 2024 MultiTool. All rights reserved.</p>
+      <nav class="footer-nav">
+        <a href="#" id="link-about">서비스 소개</a> | 
+        <a href="#" id="link-privacy">개인정보처리방침</a>
+      </nav>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
