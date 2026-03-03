@@ -3,15 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>동물상 테스트 & 로또 생성기</title>
+  <title>멀티 툴 서비스</title>
   <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
-  <div class="container">
-    <button id="theme-toggle" class="theme-toggle">🌙</button>
-    
-    <section class="animal-test-section">
-      <h1>동물상 테스트</h1>
+  <header class="main-header">
+    <div class="header-content">
+      <h2 id="app-logo" class="logo">MultiTool</h2>
+      <div class="header-actions">
+        <button id="theme-toggle" class="theme-toggle">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Home View -->
+    <section id="home-view" class="view">
+      <h1>어떤 서비스를 이용하시겠습니까?</h1>
+      <div class="card-grid">
+        <div class="tool-card" id="go-animal-test">
+          <div class="card-icon">🐶</div>
+          <h3>동물상 테스트</h3>
+          <p>AI가 분석하는 당신의 동물상 확인</p>
+        </div>
+        <div class="tool-card" id="go-lotto">
+          <div class="card-icon">🎱</div>
+          <h3>로또 생성기</h3>
+          <p>행운의 번호를 추첨해드립니다</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Animal Test View -->
+    <section id="animal-test-view" class="view hidden">
+      <div class="view-header">
+        <button class="back-btn">← 뒤로가기</button>
+        <h1>동물상 테스트</h1>
+      </div>
       <p class="subtitle">사진을 업로드하여 당신의 동물상을 확인하세요</p>
       
       <div class="upload-area" id="upload-area">
@@ -29,14 +57,17 @@
       <div id="loading-spinner" class="hidden">AI 분석 중...</div>
     </section>
 
-    <hr class="section-divider">
-
-    <section class="lotto-section">
-      <h2>로또 번호 생성기</h2>
+    <!-- Lotto View -->
+    <section id="lotto-view" class="view hidden">
+      <div class="view-header">
+        <button class="back-btn">← 뒤로가기</button>
+        <h1>로또 번호 생성기</h1>
+      </div>
       <div id="lotto-numbers" class="lotto-numbers"></div>
       <button id="generate-btn" class="secondary-btn">번호 생성</button>
     </section>
 
+    <!-- Shared Sections -->
     <section class="contact-section">
       <hr>
       <h3>제휴 문의</h3>
@@ -54,20 +85,19 @@
     <section class="comments-section">
       <hr>
       <div id="disqus_thread"></div>
-      <script>
-          (function() {
-          var d = document, s = d.createElement('script');
-          s.src = 'https://product-builder-test01.disqus.com/embed.js';
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-          })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </section>
-  </div>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
   <script defer type="text/javascript" src="/main.js"></script>
+  <script>
+      (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://product-builder-test01.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
 </body>
 </html>
