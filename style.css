@@ -126,6 +126,60 @@ h1 {
   transform: translateY(0);
 }
 
+.contact-section {
+  margin-top: 40px;
+  text-align: left;
+}
+
+.contact-section hr {
+  border: 0;
+  border-top: 1px solid var(--shadow-color);
+  margin-bottom: 20px;
+}
+
+.contact-section h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: var(--h1-color);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--shadow-color);
+  border-radius: 6px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+}
+
 @keyframes popIn {
   to {
     transform: scale(1);
