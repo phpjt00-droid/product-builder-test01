@@ -171,8 +171,9 @@ body {
 .lotto-numbers {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin: 30px 0;
+  align-items: center;
+  gap: 12px;
+  margin: 40px 0;
   flex-wrap: wrap;
 }
 
@@ -187,6 +188,33 @@ body {
   align-items: center;
   font-weight: bold;
   font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  animation: ballPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.lotto-number.bonus {
+  background-color: var(--secondary-color);
+}
+
+.lotto-plus {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+  animation: fadeIn 0.5s both;
+}
+
+@keyframes ballPop {
+  0% { 
+    transform: scale(0) rotate(-180deg); 
+    opacity: 0; 
+  }
+  70% { 
+    transform: scale(1.2) rotate(10deg); 
+  }
+  100% { 
+    transform: scale(1) rotate(0); 
+    opacity: 1; 
+  }
 }
 
 .secondary-btn {
@@ -199,6 +227,16 @@ body {
   font-weight: bold;
   cursor: pointer;
   width: 100%;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.secondary-btn:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.secondary-btn:active {
+  transform: translateY(0);
 }
 
 /* Contact & Comments */

@@ -92,16 +92,38 @@ async function analyzeImage() {
 const generateNumbers = () => {
   lottoNumbersContainer.innerHTML = '';
   const numbers = new Set();
-  while (numbers.size < 6) {
+  
+  // Pick 7 unique numbers
+  while (numbers.size < 7) {
     numbers.add(Math.floor(Math.random() * 45) + 1);
   }
-  const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
-  sortedNumbers.forEach((number, index) => {
-    const numberElement = document.createElement('div');
-    numberElement.className = 'lotto-number';
-    numberElement.textContent = number;
-    lottoNumbersContainer.appendChild(numberElement);
+  
+  const numbersArray = Array.from(numbers);
+  const mainNumbers = numbersArray.slice(0, 6).sort((a, b) => a - b);
+  const bonusNumber = numbersArray[6];
+
+  // Create main numbers
+  mainNumbers.forEach((number, index) => {
+    const ball = document.createElement('div');
+    ball.className = 'lotto-number';
+    ball.textContent = number;
+    ball.style.animationDelay = `${index * 0.15}s`;
+    lottoNumbersContainer.appendChild(ball);
   });
+
+  // Create plus sign
+  const plus = document.createElement('div');
+  plus.className = 'lotto-plus';
+  plus.textContent = '+';
+  plus.style.animationDelay = '1s';
+  lottoNumbersContainer.appendChild(plus);
+
+  // Create bonus number
+  const bonusBall = document.createElement('div');
+  bonusBall.className = 'lotto-number bonus';
+  bonusBall.textContent = bonusNumber;
+  bonusBall.style.animationDelay = '1.2s';
+  lottoNumbersContainer.appendChild(bonusBall);
 };
 
 // --- Theme Functions ---
