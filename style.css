@@ -1,28 +1,80 @@
+:root {
+  --bg-color: #f0f2f5;
+  --container-bg: #fff;
+  --text-color: #333;
+  --h1-color: #1c1e21;
+  --button-bg: #4267b2;
+  --button-hover-bg: #365899;
+  --button-active-bg: #29487d;
+  --button-text: #fff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --button-shadow: rgba(66, 103, 178, 0.3);
+}
+
+[data-theme="dark"] {
+  --bg-color: #18191a;
+  --container-bg: #242526;
+  --text-color: #e4e6eb;
+  --h1-color: #e4e6eb;
+  --button-bg: #2d88ff;
+  --button-hover-bg: #1a73e8;
+  --button-active-bg: #1558b0;
+  --button-text: #fff;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --button-shadow: rgba(45, 136, 255, 0.3);
+}
+
 body {
-  background-color: #f0f2f5;
-  color: #333;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
-  background-color: #fff;
+  background-color: var(--container-bg);
   padding: 40px;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px var(--shadow-color);
   text-align: center;
   width: 90%;
   max-width: 400px;
+  position: relative;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 h1 {
-  color: #1c1e21;
+  color: var(--h1-color);
   font-size: 28px;
   margin-bottom: 20px;
+  transition: color 0.3s;
 }
 
 .lotto-numbers {
@@ -35,8 +87,8 @@ h1 {
 }
 
 .lotto-number {
-  background-color: #4267b2;
-  color: #fff;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -48,28 +100,29 @@ h1 {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transform: scale(0);
   animation: popIn 0.5s ease-out forwards;
+  transition: background-color 0.3s;
 }
 
 #generate-btn {
-  background-color: #4267b2;
-  color: #fff;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   border: none;
   padding: 15px 30px;
   font-size: 18px;
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: 0 4px 10px rgba(66, 103, 178, 0.3);
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 4px 10px var(--button-shadow);
 }
 
 #generate-btn:hover {
-  background-color: #365899;
+  background-color: var(--button-hover-bg);
   transform: translateY(-2px);
 }
 
 #generate-btn:active {
-  background-color: #29487d;
+  background-color: var(--button-active-bg);
   transform: translateY(0);
 }
 
