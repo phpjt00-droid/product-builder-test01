@@ -1,6 +1,13 @@
 // --- Selectors ---
 const views = document.querySelectorAll('.view');
 const appLogo = document.getElementById('app-logo');
+
+// Header Navigation
+const navHome = document.getElementById('nav-home');
+const navAnimal = document.getElementById('nav-animal');
+const navLotto = document.getElementById('nav-lotto');
+
+// Card Selectors
 const goAnimalBtn = document.getElementById('go-animal-test');
 const goLottoBtn = document.getElementById('go-lotto');
 const backBtns = document.querySelectorAll('.back-btn');
@@ -109,7 +116,7 @@ const generateNumbers = () => {
       const ball = document.createElement('div');
       ball.className = 'lotto-number';
       ball.textContent = number;
-      ball.style.animationDelay = `${(row * 0.15) + (index * 0.05)}s`;
+      ball.style.animationDelay = `${(row * 0.1) + (index * 0.05)}s`;
       rowContainer.appendChild(ball);
     });
 
@@ -121,7 +128,7 @@ const generateNumbers = () => {
     const bonusBall = document.createElement('div');
     bonusBall.className = 'lotto-number bonus';
     bonusBall.textContent = bonusNumber;
-    bonusBall.style.animationDelay = `${(row * 0.15) + 0.5}s`;
+    bonusBall.style.animationDelay = `${(row * 0.1) + 0.4}s`;
     rowContainer.appendChild(bonusBall);
     
     lottoNumbersContainer.appendChild(rowContainer);
@@ -146,7 +153,12 @@ const toggleTheme = () => {
 
 // --- Event Listeners ---
 
+// Navigation
 appLogo.addEventListener('click', () => switchView('home-view'));
+navHome.addEventListener('click', (e) => { e.preventDefault(); switchView('home-view'); });
+navAnimal.addEventListener('click', (e) => { e.preventDefault(); switchView('animal-test-view'); });
+navLotto.addEventListener('click', (e) => { e.preventDefault(); switchView('lotto-view'); });
+
 goAnimalBtn.addEventListener('click', () => switchView('animal-test-view'));
 goLottoBtn.addEventListener('click', () => switchView('lotto-view'));
 backBtns.forEach(btn => btn.addEventListener('click', () => switchView('home-view')));
