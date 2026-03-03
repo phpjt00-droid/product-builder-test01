@@ -3,17 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>로또 번호 생성기</title>
+  <title>동물상 테스트 & 로또 생성기</title>
   <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
   <div class="container">
     <button id="theme-toggle" class="theme-toggle">🌙</button>
-    <h1>로또 번호 생성기</h1>
-    <div id="lotto-numbers" class="lotto-numbers"></div>
-    <button id="generate-btn">번호 생성</button>
+    
+    <section class="animal-test-section">
+      <h1>동물상 테스트</h1>
+      <p class="subtitle">AI가 분석하는 당신의 동물상</p>
+      <div id="webcam-container" class="webcam-container"></div>
+      <div id="label-container" class="label-container"></div>
+      <button type="button" id="start-btn" class="primary-btn">테스트 시작하기</button>
+      <div id="loading-spinner" class="hidden">모델 로딩 중...</div>
+    </section>
 
-    <div class="contact-section">
+    <hr class="section-divider">
+
+    <section class="lotto-section">
+      <h2>로또 번호 생성기</h2>
+      <div id="lotto-numbers" class="lotto-numbers"></div>
+      <button id="generate-btn" class="secondary-btn">번호 생성</button>
+    </section>
+
+    <section class="contact-section">
       <hr>
       <h3>제휴 문의</h3>
       <form action="https://formspree.io/f/xeelbblz" method="POST">
@@ -25,8 +39,9 @@
         </div>
         <button type="submit" class="submit-btn">문의하기</button>
       </form>
-    </div>
-    <div class="comments-section">
+    </section>
+
+    <section class="comments-section">
       <hr>
       <div id="disqus_thread"></div>
       <script>
@@ -38,8 +53,11 @@
           })();
       </script>
       <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
+    </section>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
